@@ -29,7 +29,8 @@
                      role="tabpanel"
                      :id="tab.id">
                     <h1>{{ tab.name }}</h1>
-                    <lorem></lorem>
+                    <hr/>
+                    <component :is="tab.component"></component>
                 </div>
             </div>
         </div>

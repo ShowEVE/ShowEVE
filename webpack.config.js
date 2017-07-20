@@ -3,6 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
     entry: './app/js/app.js',
+    target: 'electron',
     output: {
         path: path.resolve(__dirname, './app'),
         filename: 'build.js'
