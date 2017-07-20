@@ -1,0 +1,30 @@
+{
+    "name": "ShowEVE",
+    "productName": "ShowEVE",
+    "version": "0.0.1",
+    "license": "MIT",
+    "main": "app/main.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ShowEVE/ShowEVE.git"
+    },
+    "devDependencies": {
+        "babel-core": "^6.25.0",
+        "babel-loader": "^7.1.1",
+        "babel-preset-env": "^1.6.0",
+        "bootstrap": "^4.0.0-alpha.6",
+        "css-loader": "^0.28.4",
+        "file-loader": "^0.11.2",
+        "vue": "^2.4.1",
+        "vue-loader": "^12.2.2",
+        "vue-template-compiler": "^2.4.1",
+        "electron": "^1.7.5",
+        "electron-packager": "^8.7.2",
+        "jquery": "^3.2.1",
+        "webpack": "^3.3.0"
+    },
+    "scripts": {
+        "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+        "package": "electron-packager"
+    }
+}

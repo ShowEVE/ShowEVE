@@ -1,0 +1,19 @@
+.main-wrapper {
+    height: 100vh;
+}
+
+.nav-pills .nav-link {
+    border-radius: 0;
+}
+
+.tab-content-margin {
+    margin-top: 1em;
+}
+
+.overflow-content {
+    overflow: scroll;
+}
+
+#navmenu {
+    min-width: 15%;
+}

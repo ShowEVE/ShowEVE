@@ -117,3 +117,7 @@ fabric.properties
 .idea/
 
 # End of https://www.gitignore.io/api/intellij+all
+
+### Custom build/release files ###
+/app/build.js
+/app/build.js.map

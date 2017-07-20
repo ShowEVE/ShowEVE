@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ShowEVE</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container-fluid main-wrapper">
+    <div class="row h-100">
+        <div id="navmenu" class="col-auto bg-inverse h-100" role="tablist">
+            <ul class="nav flex-column nav-pills nav-fill">
+                <li v-for="(link, index) in links" class="nav-item">
+                    <a data-toggle="tab"
+                       role="tab"
+                       :href="'#' + link.id"
+                       :class="{'nav-link': true, 'text-left': true, active: (index == 0)}">
+                        {{ link.name }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="main" class="col overflow-content">
+            <div class="tab-content tab-content-margin">
+                <div v-for="(tab, index) in tabs"
+                     :class="{'tab-pane': true, fade: true, show: (index == 0), active: (index == 0)}"
+                     role="tabpanel"
+                     :id="tab.id">
+                    <h1>{{ tab.name }}</h1>
+                    <lorem></lorem>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Javascript libraries including a fix for module exports -->
+<script>if (typeof module === 'object') {
+    window.module = module;
+    module = undefined;
+}</script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/tether/dist/js/tether.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>if (window.module) module = window.module;</script>
+<script src="build.js"></script>
+</body>
+</html>
