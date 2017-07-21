@@ -1,7 +1,7 @@
 {
     "name": "ShowEVE",
     "productName": "ShowEVE",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "license": "MIT",
     "main": "app/main.js",
     "repository": {
@@ -12,6 +12,7 @@
         "bootstrap": "^4.0.0-alpha.6",
         "electron-oauth2": "^3.0.0",
         "electron-settings": "^3.1.1",
+        "font-awesome": "^4.7.0",
         "jquery": "^3.2.1"
     },
     "devDependencies": {
@@ -19,14 +20,14 @@
         "babel-loader": "^7.1.1",
         "babel-preset-env": "^1.6.0",
         "css-loader": "^0.28.4",
-        "file-loader": "^0.11.2",
-        "vue": "^2.4.1",
-        "vue-loader": "^12.2.2",
-        "vue-template-compiler": "^2.4.1",
-        "electron": "^1.7.5",
+        "electron": "~1.6.11",
         "electron-packager": "^8.7.2",
-        "webpack": "^3.3.0",
-        "uglifyjs-webpack-plugin": "^1.0.0-beta.1"
+        "file-loader": "^0.11.2",
+        "uglifyjs-webpack-plugin": "1.0.0-beta.1",
+        "vue": "^2.4.2",
+        "vue-loader": "^12.2.2",
+        "vue-template-compiler": "^2.4.2",
+        "webpack": "^3.3.0"
     },
     "scripts": {
         "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",

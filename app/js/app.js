@@ -1,12 +1,14 @@
 const Vue = require('vue/dist/vue.common');
+const $ = require("jquery");
 const Lorem = require('../components/lorem.vue');
+const Character = require('../components/character.vue');
 const Preferences = require('../components/preferences.vue');
 
 const tabs = [
     {
         id: 'character',
         name: 'Character',
-        component: 'lorem'
+        component: 'character'
     },
     {
         id: 'industry',
@@ -28,13 +30,6 @@ const tabs = [
 Vue.mixin({
     data: function () {
         return {
-            get isLoggedIn() {
-                const settings = require('electron').remote.require('electron-settings');
-                return (settings.has('auth.access_token') && settings.has('auth.refresh_token') && settings.has('auth.expires_in'));
-            },
-            set isLoggedIn(data) {
-                // Do nothing, dummy method to trigger observer
-            },
             get encryptedSecret() {
                 return 'YEHp4vWm5/0rjxQ5PtuOPdlQayiPRnmsE/o2JTJy8UhhSGfm9hqxBFaWSBPPiA0u';
             },
@@ -45,7 +40,7 @@ Vue.mixin({
                 return decrypted + decipher.final('utf8');
             },
             get scope() {
-                return 'esi-skills.read_skills.v1 esi-skills.read_skillqueue.v1 esi-wallet.read_character_wallet.v1';
+                return 'esi-universe.read_structures.v1 esi-location.read_location.v1 esi-location.read_online.v1 esi-wallet.read_character_wallet.v1';
             },
             get oauthConfig() {
                 return {
@@ -54,8 +49,7 @@ Vue.mixin({
                     authorizationUrl: 'https://login.eveonline.com/oauth/authorize',
                     tokenUrl: 'https://login.eveonline.com/oauth/token',
                     useBasicAuthorizationHeader: true,
-                    redirectUri: 'http://localhost:5225/callback',
-                    infoUrl: 'https://login.eveonline.com/oauth/verify'
+                    redirectUri: 'http://localhost:5225/callback'
                 };
             },
             get oauthWindowParams() {
@@ -69,8 +63,34 @@ Vue.mixin({
                 }
             }
         };
+    },
+    methods: {
+        getCharacterInfoPromise: function () {
+            return new Promise((resolve, reject) => {
+                const settings = require('electron').remote.require('electron-settings');
+                if (settings.has('auth.access_token') && settings.has('auth.refresh_token') && settings.has('auth.expires_in')) {
+                    $.ajax('https://login.eveonline.com/oauth/verify', {
+                        headers: {
+                            Authorization: 'Bearer ' + settings.get('auth.access_token')
+                        },
+                    }).then(data => {
+                        resolve(data);
+                    }, error => {
+                        reject(error);
+                    });
+                } else {
+                    reject(new Error('User not logged in!'));
+                }
+            });
+        },
+        hasTokens: function() {
+            const settings = require('electron').remote.require('electron-settings');
+            return settings.has('auth.access_token') && settings.has('auth.refresh_token') && settings.has('auth.expires_in');
+        }
     }
 });
+
+Vue.component('notloggedin', require('../components/notloggedin.vue'));
 
 new Vue({
     el: "#navmenu",
@@ -86,6 +106,7 @@ new Vue({
     },
     components: {
         lorem: Lorem,
-        preferences: Preferences
+        character: Character,
+        preferences: Preferences,
     }
 });
